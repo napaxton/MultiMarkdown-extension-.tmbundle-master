@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env perl
+
+local $/;
+$text = &lt;&gt;;
+
+$cur_line = $ENV{'TM_CURRENT_LINE'};
+$new_cur_line = $cur_line;
+if ($new_cur_line =~ s/(\t)+(.*)$/:$1\${1:$2}/m) {
+} else {
+	$new_cur_line.= ": \$0";
+}
+
+$replacement = "";
+
+$g_max_width = 0;
+
+$text =~ s/^$cur_line$/$new_cur_line/m;
+
+$text =~ s{
+	^(([a-zA-Z0-9][0-9a-zA-Z _-]*?:).*$)
+}{
+	my $line = $1;
+	my $key = $2;
+	my $result = "";
+
+	# Find widest header label
+	if (length($key) &gt; $g_max_width) {
+		$g_max_width = length($key);
+	}
+
+	$line;
+}mgex;
+
+# Find the necessary width to allow all headers and 1 space
+$g_max_width++;
+$g_tabs = int(0.9999 + $g_max_width/$ENV{'TM_TAB_SIZE'});
+$g_max_width = $g_tabs * $ENV{'TM_TAB_SIZE'};
+
+# Now add appropriate numbers of tabs
+$text =~ s{
+	^([a-zA-Z0-9][0-9a-zA-Z _-]*?:)[ \t]*(.*)$
+}{
+	my $key = $1;
+	my $value= $2;
+	my $space = $g_max_width - length($key) - 1;
+
+	$tabs = $space / $ENV{'TM_TAB_SIZE'};
+	$tabs ++;		# Everybody gets at least 1
+
+	my $result = $key;
+
+	for ($i = 1; $i &lt;= $tabs;$i++){
+		$result.="\t";
+	}
+	$result.= $value; 	# For debugging . " " . length($key) . " $space $tabs";
+	
+	$result;
+}xmge;
+
+# Now, add appropriate numbers of leading tabs for multi-line values
+
+$text =~ s{
+	^\s+(.*)
+}{
+	my $result;
+	for ($i = 1; $i &lt;= $g_tabs;$i++){
+		$result.="\t";
+	}
+	$result .$1;
+}xmge;
+
+$text =~ s{
+	^(\S[^\:]*)$
+}{
+	my $result;
+	for ($i = 1; $i &lt;= $g_tabs;$i++){
+		$result.="\t";
+	}
+	$result .$1;
+}xmge;
+
+$text =~ s/\$/\\\$/g;
+$text =~ s/\\\$0/\$0/s;
+$text =~ s/\\\${1/\${1/s;
+
+print $text;
+
+</string>
+	<key>fallbackInput</key>
+	<string>scope</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>name</key>
+	<string>Metadata - Advance to Value</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>meta.header.multimarkdown</string>
+	<key>tabTrigger</key>
+	<string>:</string>
+	<key>uuid</key>
+	<string>AF23DB79-1CCB-47EA-87A6-6727524BBA9A</string>
+</dict>
+</plist>

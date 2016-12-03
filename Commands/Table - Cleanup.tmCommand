@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string># Cleanup the spacing of MultiMarkdown tables in the selection
+
+"${TM_MULTIMARKDOWN_PATH:-$HOME/Library/Application Support/MultiMarkdown}/Utilities/table_cleanup.pl" 
+
+</string>
+	<key>fallbackInput</key>
+	<string>scope</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^k</string>
+	<key>name</key>
+	<string>Table - Cleanup</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>markup.table.multimarkdown</string>
+	<key>uuid</key>
+	<string>DB739633-6AF0-460A-BF34-86BAD8C22C4D</string>
+</dict>
+</plist>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env perl
+
+# New, cleaned up, improved list sibling command
+# Thanks to Allan Odgaard and Brian H for finding and 
+# 	helping to fix problem with special characters in list items
+
+
+# get current line, and break into what is left and right of caret
+
+$line = $ENV{'TM_CURRENT_LINE'};
+
+$index = $ENV{'TM_LINE_INDEX'};
+$line =~ /^(.{$index})(.*)$/;
+$left = $1;
+$right = $2;
+
+
+# Escape special characters since we will paste as snippet
+$left =~ s/(?=[\$`\\])/\\/g;
+$right =~ s/(?=[\$`\\])/\\/g;
+
+# Now, figure out what to paste back
+
+if ($left =~ /^(\s*(\*|\+|\-|\d+\.)\s*)\S+/) {
+	# We appear to have a list item with content, so create a new sibling
+	
+	$marker = $1;	# What was used as a list item marker?
+	
+	# If the marker included a counter, increment it
+	$marker =~ s{
+		(\d+)
+	}{
+		$1+1;
+	}ex;
+	
+	print "$left\n$marker$right\$0";
+} else {
+	# Not a list item with content, so strip marker (if any) and add a newline
+	$left =~ s/^\s*((\*|\+|\-|\d+\.)\s*)//;
+	print "$left\n$right\$0";
+}
+</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string></string>
+	<key>name</key>
+	<string>List - New Sibling</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>text.html.markdown markup.list</string>
+	<key>uuid</key>
+	<string>5C692A38-2045-42F7-973B-E5D0C2558B03</string>
+</dict>
+</plist>

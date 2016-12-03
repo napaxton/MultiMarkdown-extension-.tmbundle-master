@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env perl
+
+# Tab forward to next cell in table, or end of line
+
+$line = &lt;&gt;;
+$index = $ENV{'TM_LINE_INDEX'};
+$original = $line;
+
+$line =~ s/^(.{$index})//;
+$line =~ s/`/\\\`/g;
+$beginning = $1;
+
+if ($beginning =~ s/(.*[^\s])(\s*\|.*?)$/$1\$0$2/) {
+	$beginning .= $line;
+	print $beginning;
+} else {
+	$original =~ s/^(.*?)(\s*\|.*)$/$1\$0$2/;
+	print $original;
+}</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^</string>
+	<key>name</key>
+	<string>Table - Previous Cell</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>markup.table.multimarkdown</string>
+	<key>uuid</key>
+	<string>3F7582D4-F2C3-44B8-944E-CDA2F069A818</string>
+</dict>
+</plist>

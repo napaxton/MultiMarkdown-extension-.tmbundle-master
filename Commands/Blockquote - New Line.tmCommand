@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env perl
+
+$line = $ENV{'TM_CURRENT_LINE'};
+$old_line = $line;
+$original = $old_line;
+
+# Strip Marker
+$old_line =~ s/^(\&gt;*\s*)*//;
+
+if ($old_line !~ /^\s*$/) {
+	# The item was not empty
+	
+	if ($line =~ s/^((\&gt;*\s*)*).*/$1/) {
+		# Line was a blockquote
+	} else {
+		# Not quote
+		$line = "";
+	}
+
+	$index = $ENV{'TM_LINE_INDEX'};
+	$original =~ s/^(.{$index})/$1\n$line\$0/;
+
+	$original =~ s/`/\\\`/g;
+	print $original;
+} else {
+	# The item was empty, so end the current quote level
+
+	if ($line =~ s/^((\&gt;*\s*)*).*/$1/) {
+		# Line was a blockquote
+		$line =~ s/(\&gt;\s*)$//;
+	} else {
+		# Not quote
+		$line = "";
+	}
+	print $line . "\n" . $line;
+}</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string></string>
+	<key>name</key>
+	<string>Blockquote - New Line</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>markup.quote.markdown</string>
+	<key>uuid</key>
+	<string>BC6D1959-6343-4620-8EEA-1463C3D240C8</string>
+</dict>
+</plist>

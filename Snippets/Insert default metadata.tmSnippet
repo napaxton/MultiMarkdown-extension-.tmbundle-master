@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>Title:			${1:Title}  
+Subtitle:		${2:Subtitle}  
+Author:			$TM_FULLNAME  
+Affiliation:	${4:$TM_ORGANIZATION_NAME}  
+Date:			${5:`date "+%B %d, %Y"`}  
+Copyright:		${6:`date +%Y` $TM_FULLNAME}.  
+				${7:This work is licensed under a Creative Commons License.  
+				http://creativecommons.org/licenses/by-sa/2.5/}
+Keywords:		$8
+
+$0</string>
+	<key>keyEquivalent</key>
+	<string>~@m</string>
+	<key>name</key>
+	<string>Insert default metadata</string>
+	<key>scope</key>
+	<string>text.html.markdown</string>
+	<key>tabTrigger</key>
+	<string>meta</string>
+	<key>uuid</key>
+	<string>8D04C38E-0187-4E53-B100-AE096CBBB984</string>
+</dict>
+</plist>

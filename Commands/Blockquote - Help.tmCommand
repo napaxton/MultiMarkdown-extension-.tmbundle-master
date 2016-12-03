@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>echo "ENTER:					Create a new blockquote line.
+						Enter again to end current blockquote level.
+
+CONTROL-RIGHT ARROW:	Add additional level of quoting.
+CONTROL-LEFT ARROW:		Remove a level of quoting.
+
+Naturally, you can reconfigure this in the Bundle Editor..."</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^h</string>
+	<key>name</key>
+	<string>Blockquote - Help</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>markup.quote.markdown</string>
+	<key>uuid</key>
+	<string>C51C8DF5-1C1A-4409-AC9B-4778280D0B1F</string>
+</dict>
+</plist>

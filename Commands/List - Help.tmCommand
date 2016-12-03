@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>echo "ENTER:	Create a new list item.
+		Enter again to end current list level.
+
+CONTROL-RIGHT ARROW:	Indent current item one level.
+CONTROL-LEFT ARROW:		Outdent current item one level.
+
+CONTROL-T:				Toggle list item type.
+CONTROL-K:				Clean up list layout.
+
+Naturally, you can reconfigure this in the Bundle Editor..."</string>
+	<key>fallbackInput</key>
+	<string>scope</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^h</string>
+	<key>name</key>
+	<string>List - Help</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>text.html.markdown markup.list</string>
+	<key>uuid</key>
+	<string>8A9993E1-CA38-49B1-92D8-ADCA4CF9C4DD</string>
+</dict>
+</plist>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env perl
+
+$line = $ENV{'TM_CURRENT_LINE'};
+
+$index = $ENV{'TM_LINE_INDEX'};
+
+if ($line =~ s/^(\t|    )//) {
+	$index--;
+}
+
+$line =~ s/^(.{$index})/$1\$0/;
+
+$line =~ s/`/\\\`/g;
+
+print $line;</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^</string>
+	<key>name</key>
+	<string>List - Outdent Line</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>text.html.markdown markup.list</string>
+	<key>uuid</key>
+	<string>1E8299F1-916B-445B-BC6F-1D3657901BB5</string>
+</dict>
+</plist>

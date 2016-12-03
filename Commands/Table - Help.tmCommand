@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>echo "CONTROL-RIGHT ARROW:	Move one cell to the right.
+CONTROL-LEFT ARROW:		Move one cell to the left.
+
+CONTROL-K:				Clean up table layout.
+
+Naturally, you can reconfigure this in the Bundle Editor..."</string>
+	<key>fallbackInput</key>
+	<string>scope</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^h</string>
+	<key>name</key>
+	<string>Table - Help</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>markup.table.multimarkdown</string>
+	<key>uuid</key>
+	<string>CA000031-1DD5-42D8-9E7E-678B006B1978</string>
+</dict>
+</plist>

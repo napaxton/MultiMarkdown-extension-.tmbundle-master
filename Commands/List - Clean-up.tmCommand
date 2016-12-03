@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env perl
+
+$result = "";
+%last_marker = ();	# Store last marker used for each list depth
+$last_leading_space = "";
+$g_tab_width = $ENV{'TM_TAB_SIZE'};
+
+$g_list_level = 0;
+
+while ($line = &lt;&gt;) {
+	$line =~ /^([ \t]*)([\*\+\_]|\d+\.)(\.?\s*)(.*)/;
+	$leading_space = $1;
+	$marker = $2;
+	$item = " " . $4;
+
+	$leading_space =~ s/\t/    /g;	# Convert tabs to spaces
+	
+	if ( $line !~ /^([ \t]*)([\*\+\_]|\d+\.)/) {
+		#$result .= "a";
+		# not a list line
+		$result .= $line;
+		$marker = $last_marker{$g_list_level};
+	} elsif (length($leading_space) &gt; length($last_leading_space)+3) {
+		# New list level
+		#$result .= "b";
+		$g_list_level++;
+		
+		$marker =~ s{
+			(\d+)
+		}{
+			# Reset count
+			"1";
+		}ex;
+
+		$last_leading_space = $leading_space;
+		
+		$result .= "\t" x $g_list_level;
+		$result .= $marker . $item . "\n";
+	} elsif (length($leading_space)+3 &lt; length($last_leading_space)) {
+		#$result .= "c";
+		# back to prior list level
+		$g_list_level = length($leading_space) / 4;
+		
+		# update marker
+		$marker = $last_marker{$g_list_level};
+		$marker =~ s{
+			(\d+)
+		}{
+			$1+1;
+		}ex;
+		
+		$last_leading_space = $leading_space;
+
+		$result .= "\t" x $g_list_level;
+		$result .= $marker . $item . "\n";
+	} else {
+		# No change in level
+		#$result .= "d";
+
+		# update marker if it exists
+		if ($last_marker{$g_list_level} ne "") {
+			$marker = $last_marker{$g_list_level};
+			$marker =~ s{
+				(\d+)
+			}{
+				$1+1;
+			}ex;
+		}
+		
+		
+		$last_leading_space = $leading_space;
+
+		$result .= "\t" x $g_list_level;
+		$result .= $marker . $item . "\n";	
+	}
+
+		$last_marker{$g_list_level} = $marker;
+}
+
+print $result;</string>
+	<key>fallbackInput</key>
+	<string>scope</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^k</string>
+	<key>name</key>
+	<string>List - Clean-up</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>text.html.markdown markup.list</string>
+	<key>uuid</key>
+	<string>4D051505-F739-4A2F-AC49-649A4ABA4271</string>
+</dict>
+</plist>

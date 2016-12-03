@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env perl
+
+$line = $ENV{'TM_CURRENT_LINE'};
+
+$old_line = $line;
+$original = $old_line;
+
+if ($line =~ /^\s*$/) {
+	# empty line
+
+	print "";
+} elsif ($line =~ /^(\s+)/) {
+	$leader = $1;
+	$index = $ENV{'TM_LINE_INDEX'};
+	$line =~ s/^(.{$index})/$1\n$leader\$0/;
+	$line =~ s/\$/\\\$/g;
+	$line =~ s/\\\$0/\$0/s;
+
+	print $line; # . "\n" . $1;
+} else {
+	# Need to find leading width, and replicate it
+	$leader = $line;
+	$leader =~ s/^([a-zA-Z0-9][0-9a-zA-Z _-]+?:)(\s*).*/$2/;
+
+	$leader = sprintf("%*s", int(length($1)/$ENV{'TM_TAB_SIZE'})*$ENV{'TM_TAB_SIZE'}, "") . $leader;
+
+	$leader =~ s{
+		\t
+	}{
+		sprintf("%*s", $ENV{'TM_TAB_SIZE'}, "");
+	}xmge;
+	$leader =~ s/[^ ]/ /g;
+
+	$leader =~ s/(.*?) {$ENV{'TM_TAB_SIZE'}}/$1\t/g;
+
+	$index = $ENV{'TM_LINE_INDEX'};
+	$line =~ s/^(.{$index})/$1\n$leader\$0/;
+	$line =~ s/\$/\\\$/g;
+	$line =~ s/\\\$0/\$0/s;
+
+	print $line; # . "\n" . $leader;
+}</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string></string>
+	<key>name</key>
+	<string>Metadata - New Line</string>
+	<key>output</key>
+	<string>insertAsSnippet</string>
+	<key>scope</key>
+	<string>meta.header.multimarkdown</string>
+	<key>uuid</key>
+	<string>442001A7-0503-46F3-96BF-4740E3BC2F16</string>
+</dict>
+</plist>

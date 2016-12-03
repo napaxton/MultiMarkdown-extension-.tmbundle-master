@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>echo "ENTER:	Create a new indented row to continue current metadata item.
+		Enter again to move to left margin for new metadata item.
+		Enter again to leave metadata section and begin document.
+
+TAB:	Hit tab after typing a metadata key, and you will be advanced the
+		appropriate number of tabs to align the value.  In addition, other
+		lines will be cleaned up.
+
+CONTROL-K:	Clean up spacing and align metadata values.
+
+Naturally, you can reconfigure this in the Bundle Editor..."</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^h</string>
+	<key>name</key>
+	<string>Metadata - Help</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>meta.header.multimarkdown</string>
+	<key>uuid</key>
+	<string>6AE91BD7-4E3B-49CD-B175-E52E76512176</string>
+</dict>
+</plist>
