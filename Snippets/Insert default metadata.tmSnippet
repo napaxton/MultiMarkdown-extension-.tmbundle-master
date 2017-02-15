@@ -7,7 +7,7 @@
 Subtitle:		${2:Subtitle}  
 Author:			$TM_FULLNAME  
 Affiliation:	${4:$TM_ORGANIZATION_NAME}  
-Date:			${5:`date "+%B %d, %Y"`}  
+Date:			${5:`date "+%d %B %Y"`}  
 Copyright:		${6:`date +%Y` $TM_FULLNAME}.  
 				${7:This work is licensed under a Creative Commons License.  
 				http://creativecommons.org/licenses/by-sa/2.5/}
