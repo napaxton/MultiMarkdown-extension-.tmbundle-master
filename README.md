@@ -2,7 +2,7 @@
 
 An MMD bundle that adds basic MMD functionality and convenience, while also trying to bring Fletcher Penney’s MMD bundle up to the world of TM2.
 
-This takes some useful commands from [Fletcher Penney's][https://github.com/fletcher] [MMD TextMate bundle][https://github.com/fletcher/markdown.tmbundle] and makes them available for use in TextMate. This is (at present, at least) an *extension* of the official MD bundle.
+This takes some useful commands from [Fletcher Penney's](https://github.com/fletcher) [MMD TextMate bundle](https://github.com/fletcher/markdown.tmbundle) and makes them available for use in TextMate. This is (at present, at least) an *extension* of the official MD bundle.
 
 **Comments, questions, suggestions, fixes, corrections certainly encouraged!**
 
